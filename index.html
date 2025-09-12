@@ -1,107 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HJH SMS BOMBER</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SBLHACKER ZONE</title>
   <style>
-    html, body {
-      height: 100%;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", Roboto, sans-serif;
-      background: black;
-      color: #f1f5f9;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+    * { box-sizing: border-box; margin:0; padding:0; }
+    html,body { height:100%; width:100%; background:#000; color:#fff; font-family: "Segoe UI", Roboto, Arial, sans-serif; overflow-x:hidden; }
+
+    /* subtle sky glow background */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-40%;
+      background: radial-gradient(circle at center, rgba(56,189,248,0.12), transparent 55%);
+      z-index:0;
+      filter: blur(24px);
     }
 
-    /* Background Matrix Animation */
-    .matrix-bg {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: black;
-      overflow: hidden;
-      z-index: 0;
+    .wrap{
+      position:relative;
+      z-index:1;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      /* start lower so header+card sit further down */
+      padding-top:90px; /* increased to push things down */
+      padding-bottom:60px;
+      gap:18px;
     }
-    .matrix-bg span {
-      position: absolute;
-      color: #ff1a8c;
-      font-size: 16px;
-      animation: drop 4s linear infinite;
-      opacity: 0.6;
+
+    /* shared width for header + card */
+    .slot {
+      width: 90%;
+      max-width: 340px;   /* same width */
+      margin-left:auto;
+      margin-right:auto;
     }
-    @keyframes drop {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100vh); }
+
+    /* Header */
+    .header.slot {
+      background: rgba(12,18,28,0.92);
+      border-radius:14px;
+      padding:12px 18px;
+      box-shadow: 0 6px 28px rgba(56,189,248,0.14);
+      display:flex;
+      align-items:center;
+      justify-content:center; /* centers title */
+      position: relative;     /* for absolute logo */
+    }
+    .header .logo {
+      position:absolute;
+      left:12px;
+      top:50%;
+      transform:translateY(-50%);
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      overflow:hidden;
+      box-shadow: 0 4px 14px rgba(56,189,248,0.18);
+      border: 2px solid rgba(255,255,255,0.04);
+      background:#08101a;
+    }
+    .header .logo img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    .header h1 {
+      color: #38bdf8;
+      font-size:16px;
+      letter-spacing:0.6px;
+      font-weight:700;
+      text-align:center;
+      text-shadow: 0 0 8px rgba(56,189,248,0.28);
+      margin:0;
     }
 
     /* Card */
-    .card {
-      position: relative;
-      z-index: 1;
-      background: rgba(30, 41, 59, 0.9);
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 12px 40px rgba(255, 20, 147, 0.7);
-      width: 100%;
-      max-width: 450px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      animation: fadeIn 1.5s ease-in-out;
+    .card.slot {
+      background: rgba(10,16,24,0.88);
+      border-radius:16px;
+      padding:20px;
+      box-shadow: 0 12px 40px rgba(56,189,248,0.12);
+      backdrop-filter: blur(6px);
+      text-align:center;
     }
+    .card h2 { color: #38bdf8; margin-bottom:12px; font-size:20px; }
+    .card input {
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:none;
+      background:#071426;
+      color:#fff;
+      font-size:15px;
+      margin-bottom:14px;
+      box-shadow: inset 0 0 8px rgba(56,189,248,0.05);
+    }
+    .card input::placeholder { color:#94a3b8; font-size:14px; }
 
-    h2 {
-      font-size: 26px;
-      margin-bottom: 20px;
-      color: #ff4da6;
-      text-shadow: 0 0 10px rgba(255, 20, 147, 0.8);
-      letter-spacing: 1px;
-      animation: glowText 2s infinite alternate;
+    .btn {
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:none;
+      font-weight:700;
+      font-size:15px;
+      cursor:pointer;
     }
-    @keyframes glowText {
-      from { text-shadow: 0 0 10px #ff1a8c, 0 0 20px #ff3399; }
-      to { text-shadow: 0 0 20px #ff66cc, 0 0 40px #ff1a8c; }
-    }
+    .btn-start { background: linear-gradient(90deg,#38bdf8,#0ea5e9); color:#032024; margin-bottom:8px; }
+    .btn-wa { background:transparent; border:1px solid rgba(56,189,248,0.18); color:#38bdf8; }
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 14px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      font-size: 15px;
-      background: #1e293b;
-      color: #fff;
-      box-shadow: inset 0 0 5px rgba(255, 20, 147, 0.4);
-    }
+    .footer { margin-top:14px; color:#bac8d6; font-size:13px; }
+    .footer b { color:#38bdf8; }
 
-    button {
-      background: linear-gradient(90deg, #ff1a8c, #ff66b2);
-      border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 8px;
-      font-size: 16px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+    /* responsive tweaks */
+    @media (max-width:420px){
+      .header.slot, .card.slot { max-width:92%; }
+      .wrap{ padding-top:60px; }
+      .header .logo{ width:32px; height:32px; left:10px; }
     }
-    button:hover {
-      transform: scale(1.07);
-      box-shadow: 0 0 18px #ff4da6;
-    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
 
-    /* WhatsApp Button */
-    .whatsapp-btn {
-      margin-top: 20px;
-      display: inline-block;
+    <!-- header (centered title, round logo at left) -->
+    <header class="header slot" role="banner" aria-label="site header">
+      <div class="logo" aria-hidden="true">
+        <!-- your logo URL (round) -->
+        <img src="https://planned-crimson-qibtjnuomw.edgeone.app/OIG3%20(1).jpeg" alt="SBLHacker Logo" />
+      </div>
+      <h1>SBLHACKER ZONE</h1>
+    </header>
+
+    <!-- card (same width) -->
+    <main class="card slot" role="main" aria-labelledby="title">
+      <h2 id="title">Welcome</h2>
+
+      <!-- only placeholder guidance inside input -->
+      <input id="number" type="tel" inputmode="numeric" placeholder="Enter Number (e.g. 92xxxxxxxxxx)" aria-label="phone number" />
+
+      <button id="sendBtn" class="btn btn-start" type="button">🚀 START</button>
+      <a href="https://whatsapp.com/channel/0029VbBVDAc1noz5dhxnYO3r" target="_blank" rel="noopener noreferrer">
+        <button class="btn btn-wa" type="button">📱 Join WhatsApp Channel</button>
+      </a>
+
+      <div class="footer">Developed by <b>SBL HACKER</b></div>
+    </main>
+
+  </div>
+
+  <script>
+    // minimal JS: keep original placeholder behavior; no extra logic needed here
+    // (you can paste your previous submission/send logic here if needed)
+    const input = document.getElementById('number');
+    const sendBtn = document.getElementById('sendBtn');
+    sendBtn.addEventListener('click', ()=> {
+      // basic validation example
+      const v = (input.value || '').replace(/[^+\d]/g,'').replace(/^\+/,'');
+      if(!/^92\d{10}$/.test(v)) {
+        alert('Invalid number. Use 92xxxxxxxxxx');
+        input.focus();
+        return;
+      }
+      // call your API or further logic
+      console.log('Would send to:', v);
+      alert('Ready to send to: ' + v);
+    });
+  </script>
+</body>
+</html>
       padding: 10px 16px;
       border-radius: 50px;
       font-size: 15px;
