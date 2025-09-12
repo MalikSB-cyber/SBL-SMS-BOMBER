@@ -30,7 +30,7 @@
     }
     .matrix-bg span {
       position: absolute;
-      color: #ff1a8c;
+      color: #38bdf8; /* Sky blue */
       font-size: 16px;
       animation: drop 4s linear infinite;
       opacity: 0.6;
@@ -47,7 +47,7 @@
       background: rgba(30, 41, 59, 0.9);
       border-radius: 16px;
       padding: 30px;
-      box-shadow: 0 12px 40px rgba(255, 20, 147, 0.7);
+      box-shadow: 0 12px 40px rgba(56, 189, 248, 0.7);
       width: 100%;
       max-width: 450px;
       text-align: center;
@@ -58,14 +58,14 @@
     h2 {
       font-size: 26px;
       margin-bottom: 20px;
-      color: #ff4da6;
-      text-shadow: 0 0 10px rgba(255, 20, 147, 0.8);
+      color: #38bdf8;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
       letter-spacing: 1px;
       animation: glowText 2s infinite alternate;
     }
     @keyframes glowText {
-      from { text-shadow: 0 0 10px #ff1a8c, 0 0 20px #ff3399; }
-      to { text-shadow: 0 0 20px #ff66cc, 0 0 40px #ff1a8c; }
+      from { text-shadow: 0 0 10px #0ea5e9, 0 0 20px #38bdf8; }
+      to { text-shadow: 0 0 20px #7dd3fc, 0 0 40px #0ea5e9; }
     }
 
     input {
@@ -78,11 +78,15 @@
       font-size: 15px;
       background: #1e293b;
       color: #fff;
-      box-shadow: inset 0 0 5px rgba(255, 20, 147, 0.4);
+      box-shadow: inset 0 0 5px rgba(56, 189, 248, 0.4);
     }
 
-    button {
-      background: linear-gradient(90deg, #ff1a8c, #ff66b2);
+    button, .whatsapp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #0ea5e9, #38bdf8);
       border: none;
       padding: 12px;
       width: 100%;
@@ -92,17 +96,120 @@
       font-weight: bold;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
     }
-    button:hover {
+    button:hover, .whatsapp-btn:hover {
       transform: scale(1.07);
-      box-shadow: 0 0 18px #ff4da6;
+      box-shadow: 0 0 18px #38bdf8;
     }
 
-    /* WhatsApp Button */
-    .whatsapp-btn {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 10px 16px;
+    /* Loading Line */
+    .loading-bar {
+      margin-top: 12px;
+      height: 6px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      display: none;
+    }
+    .loading-bar .progress {
+      height: 100%;
+      width: 0%;
+      background: #38bdf8;
+      transition: width 2s linear;
+    }
+    .loading-bar.success .progress {
+      background: #22c55e !important; /* green */
+      width: 100% !important;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #bbb;
+      text-align: center;
+      z-index: 1;
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Animation -->
+  <div class="matrix-bg"></div>
+
+  <!-- Card -->
+  <div class="card">
+    <h2>SBL HACKER</h2>
+    <input type="text" id="number" placeholder="Enter Number (92xxxxxxxxxx)" />
+    <button onclick="sendSMS()">START</button>
+    <div class="loading-bar" id="loadingBar"><div class="progress"></div></div>
+    <br>
+    <a href="https://whatsapp.com/channel/0029VbBVDAc1noz5dhxnYO3r" target="_blank" class="whatsapp-btn">
+       WhatsApp Channel
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    Developed by <b>SBL HACKER</b>
+  </footer>
+
+  <script>
+    // Matrix Effect
+    const bg = document.querySelector('.matrix-bg');
+    for (let i = 0; i < 70; i++) {
+      let span = document.createElement('span');
+      span.innerText = Math.random() > 0.5 ? "1" : "0";
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      span.style.fontSize = (12 + Math.random() * 12) + "px";
+      bg.appendChild(span);
+    }
+
+    // API Call
+    async function sendSMS() {
+      let num = document.getElementById("number").value;
+      const loadingBar = document.getElementById("loadingBar");
+      const progress = loadingBar.querySelector(".progress");
+
+      if (!num) return alert("⚠️ Please enter a number!");
+
+      // Show loading bar
+      loadingBar.style.display = "block";
+      loadingBar.classList.remove("success");
+      progress.style.width = "100%";
+
+      try {
+        let res = await fetch("/api/sms", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ number: num })
+        });
+
+        let data = await res.json();
+        if (data.success) {
+          setTimeout(() => {
+            loadingBar.classList.add("success");
+          }, 2000);
+        } else {
+          alert("❌ Error: " + (data.error || "Unknown"));
+          loadingBar.style.display = "none";
+        }
+      } catch (err) {
+        alert("⚠️ Server error: " + err.message);
+        loadingBar.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
+  padding: 10px 16px;
       border-radius: 50px;
       font-size: 15px;
       font-weight: bold;
