@@ -1,108 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SBLHACKER ZONE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SBL SMS BOMBER - SBL HACKER</title>
+  <link rel="stylesheet" href="css/all.min.css">
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -40%;
-      background: radial-gradient(circle, rgba(56,189,248,0.15), transparent 70%);
-      z-index: 0;
-    }
-    .wrap {
-      position: relative;
-      z-index: 1;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #1a0b2e, #2e1a47, #4b0082, #2e1a47);
+      color: #e0e7ff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 120px; /* header/card ko niche kia */
-      gap: 20px;
-    }
-    .header, .card {
-      width: 90%;
-      max-width: 340px;
-      margin: 0 auto;
-      border-radius: 14px;
-      padding: 16px;
-      background: rgba(15,23,36,0.9);
-      box-shadow: 0 6px 28px rgba(56,189,248,0.2);
+      justify-content: center;
     }
     .header {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      justify-content: center; /* center title */
+      padding: 20px;
+      background: rgba(30, 10, 60, 0.8);
+      border-bottom: 4px solid #9b59b6;
+      border-radius: 20px;
+      margin: 20px;
+      width: calc(100% - 40px);
+      max-width: 1200px;
     }
-    .header .logo {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid rgba(56,189,248,0.4);
-      box-shadow: 0 4px 12px rgba(56,189,248,0.2);
+    .title {
+      font-size: clamp(28px, 5vw, 32px);
+      font-weight: 900;
+      background: linear-gradient(45deg, #9b59b6, #e91e63);
+      -webkit-background-clip: text;
+      color: transparent;
     }
-    .header .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .header h1 {
-      font-size: 16px;
-      font-weight: bold;
-      color: #38bdf8;
-    }
-    .card {
+    .container {
+      background: rgba(30, 10, 60, 0.9);
+      border-radius: 20px;
+      padding: 40px;
+      margin: 20px;
+      max-width: 700px;
+      width: calc(100% - 40px);
       text-align: center;
-      padding: 22px;
     }
-    .card h2 {
-      color: #38bdf8;
-      margin-bottom: 12px;
-    }
-    .card input {
+    input[type="text"] {
       width: 100%;
-      padding: 12px;
+      max-width: 500px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 3px solid #9b59b6;
       border-radius: 10px;
-      border: none;
-      background: #0f172a;
-      color: #fff;
-      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e0e7ff;
     }
-    .card input::placeholder {
-      color: #94a3b8;
-    }
-    .btn {
-      width: 100%;
-      padding: 12px;
+    .button {
+      padding: 15px 40px;
+      border-radius: 50px;
       border: none;
-      border-radius: 10px;
-      font-weight: bold;
+      background: linear-gradient(45deg, #9b59b6, #e91e63);
+      color: #e0e7ff;
       cursor: pointer;
+      font-weight: bold;
     }
-    .btn-start {
-      background: #38bdf8;
-      color: #000;
-      margin-bottom: 8px;
+    .status {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #60a5fa;
     }
-    .btn-wa {
-      background: transparent;
-      border: 1px solid rgba(56,189,248,0.5);
-      color: #38bdf8;
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .social-button {
+      padding: 12px 30px;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #9b59b6, #ee1e63);
+      color: #fff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="title">SBL HACKER</div>
+  </header>
+
+  <div class="container">
+    <h1>SBL SMS BOMBER</h1>
+    <form id="BOMBER-form">
+      <input type="text" id="phone" name="number" placeholder="Enter number (e.g., 92323....)" required>
+      <button type="submit" class="button"><i class="fa-solid fa-rocket"></i> Launch BOMBER</button>
+    </form>
+    <p id="status" class="status"></p>
+
+    <div class="social-buttons">
+      <a href="https://whatsapp.com/channel/0029VbBVDAc1noz5dhxnYO3r" target="_blank" class="social-button">
+        <i class="fa-brands fa-whatsapp"></i> Join WhatsApp
+      </a>
+    </div>
+
+    <div class="footer">
+      &copy; 2025 All Rights Reserved SBL HACKER | For Educational Use Only
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('BOMBER-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const phone = document.getElementById('phone').value;
+      const status = document.getElementById('status');
+      status.innerText = 'Launching BOMBER...';
+
+      try {
+        const response = await fetch('/api/BOMBER', { // <-- aapka backend route
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ number: phone })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          status.innerText = data.result;
+          status.style.color = '#60a5fa';
+        } else {
+          status.innerText = data.error || "Failed";
+          status.style.color = '#ef4444';
+        }
+      } catch (error) {
+        status.innerText = `Error: ${error.message}`;
+        status.style.color = '#ef4444';
+      }
+    });
+  </script>
+</body>
+</html>      color: #38bdf8;
     }
     .footer {
       margin-top: 12px;
