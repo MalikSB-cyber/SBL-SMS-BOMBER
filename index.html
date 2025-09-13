@@ -186,6 +186,25 @@
     });
   </script>
 </body>
+</html>
+        const data = await res.json();
+
+        if (data.success) {
+          status.style.color = "lime";
+          status.textContent = "✅ Successfully sent!";
+        } else {
+          status.style.color = "red";
+          status.textContent = "❌ Failed: " + (data.error || "Unknown error");
+        }
+      } catch (err) {
+        status.style.color = "red";
+        status.textContent = "❌ Server error";
+      }
+
+      btn.innerHTML = '<i class="fas fa-rocket"></i> Launch SB';
+    });
+  </script>
+</body>
 </html>      transition: 0.3s;
     }
     .btn:hover {
