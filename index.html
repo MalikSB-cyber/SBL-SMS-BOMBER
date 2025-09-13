@@ -2,21 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SBL HACKER</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #1a0033, #0d001a);
+      background: #0b0015;
       color: white;
       text-align: center;
     }
+
+    /* Header */
     .header {
-      margin: 30px auto 15px auto;
-      padding: 15px 20px;
-      width: 90%;
-      max-width: 500px;
+      margin: 60px auto 25px auto;
+      padding: 25px 20px;
+      width: 75%;
+      max-width: 400px;
       background: #0d001a;
       border-radius: 15px;
       box-shadow: 0 0 20px #00cfff;
@@ -26,38 +30,50 @@
       gap: 10px;
       position: relative;
     }
-    .header img {
+    .logo-wrapper {
       position: absolute;
       left: 15px;
-      width: 40px;
-      height: 40px;
+      width: 45px;   /* chhota */
+      height: 45px;  /* chhota */
+      background: #00cfff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-wrapper img {
+      width: 38px;   /* chhota */
+      height: 38px;  /* chhota */
       border-radius: 50%;
     }
     .header h1 {
       flex: 1;
       margin: 0;
       color: #00cfff;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
       text-align: center;
     }
+
+    /* Card */
     .card {
-      margin: 10px auto;
-      padding: 20px;
-      width: 90%;
-      max-width: 500px;
+      margin: 30px auto;
+      padding: 25px;
+      width: 75%;
+      max-width: 400px;
       background: #0d001a;
       border-radius: 15px;
       box-shadow: 0 0 20px #00cfff;
     }
     .card h2 {
+      margin-top: 5px;
       margin-bottom: 20px;
-      font-size: 24px;
+      font-size: 26px;
       color: #00cfff;
     }
     .card input {
       width: 85%;
-      max-width: 350px;
+      max-width: 300px;
       padding: 10px;
       margin-bottom: 20px;
       border: 2px solid #00cfff;
@@ -65,35 +81,37 @@
       outline: none;
       text-align: center;
       font-size: 16px;
+      background: #000;
+      color: #fff;
     }
+
+    /* Buttons */
     .btn {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       width: 85%;
-      max-width: 350px;
+      max-width: 300px;
       margin: 10px auto;
       padding: 12px;
-      border: none;
-      border-radius: 25px;
+      background: #00cfff;
+      color: #000;
       font-size: 16px;
       font-weight: bold;
+      border: none;
+      border-radius: 25px;
       cursor: pointer;
-      color: white;
-      background: #00cfff;
-      box-shadow: 0 0 15px #00cfff;
       transition: 0.3s;
     }
     .btn:hover {
-      opacity: 0.85;
+      background: #009fbb;
     }
-    .success {
-      display: none;
-      color: #00ff88;
-      margin-top: 15px;
-      font-weight: bold;
-    }
+
+    /* Footer */
     footer {
-      margin: 20px 0;
-      font-size: 12px;
+      margin-top: 30px;
+      font-size: 14px;
       color: gray;
     }
     footer span {
@@ -105,75 +123,67 @@
 <body>
   <!-- Header -->
   <div class="header">
-    <img src="https://i.postimg.cc/8Cyn5rh2/OIG3-1.jpg" alt="Logo"/>
+    <div class="logo-wrapper">
+      <img src="https://i.postimg.cc/8Cyn5rh2/OIG3-1.jpg" alt="logo" />
+    </div>
     <h1>SBL HACKER</h1>
   </div>
 
   <!-- Card -->
   <div class="card">
     <h2>Welcome</h2>
-    <input type="text" id="numberInput" placeholder="Enter number (e.g., 92323....)" />
-
-    <button class="btn" id="launchBtn">🚀 Launch SB</button>
-
-    <button class="btn">💬 Join WhatsApp</button>
-
-    <div class="success" id="successMsg">✅ Successfully Send</div>
+    <input type="text" id="number" placeholder="Enter number (e.g., 92323...)" />
+    <button class="btn" id="launchBtn">
+      <i class="fas fa-rocket"></i> Launch SB
+    </button>
+    <button class="btn" onclick="window.open('https://whatsapp.com/channel/0029VbBVDAc1noz5dhxnYO3r','_blank')">
+      <i class="fab fa-whatsapp"></i> Join WhatsApp
+    </button>
+    <p id="status"></p>
   </div>
 
   <!-- Footer -->
   <footer>
-    © 2025 All Rights Reserved SBL HACKER | For Educational Use Only<br>
     Developed by <span>SBL HACKER</span>
   </footer>
 
   <script>
-    const launchBtn = document.getElementById("launchBtn");
-    const numberInput = document.getElementById("numberInput");
-    const successMsg = document.getElementById("successMsg");
+    const btn = document.getElementById("launchBtn");
+    const status = document.getElementById("status");
 
-    launchBtn.addEventListener("click", async () => {
-      const inputVal = numberInput.value.trim();
-      if (!inputVal) {
-        alert("Please enter a number");
+    btn.addEventListener("click", async () => {
+      const number = document.getElementById("number").value.trim();
+      if (!number) {
+        alert("Please enter a number!");
         return;
       }
 
-      launchBtn.textContent = "🚀 Launch SB ...";
-      launchBtn.disabled = true;
-      successMsg.style.display = "none";
+      btn.innerHTML = '<i class="fas fa-rocket"></i> Launching...';
+      status.textContent = "";
 
       try {
-        const response = await fetch("/api/sms", {
+        const res = await fetch("/api/sms", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ number: inputVal }),
+          body: JSON.stringify({ number }),
         });
 
-        const contentType = response.headers.get("content-type");
-        let result;
+        const data = await res.json();
 
-        if (contentType && contentType.includes("application/json")) {
-          result = await response.json();
+        if (data.success) {
+          status.style.color = "lime";
+          status.textContent = "✅ Successfully sent!";
         } else {
-          const text = await response.text();
-          throw new Error("Server returned non-JSON: " + text);
-        }
-
-        launchBtn.textContent = "🚀 Launch SB";
-        launchBtn.disabled = false;
-
-        if (result.success) {
-          successMsg.style.display = "block";
-        } else {
-          alert("Error: " + (result.error || "Unknown error"));
+          status.style.color = "red";
+          status.textContent = "❌ Failed: " + (data.error || "Unknown error");
         }
       } catch (err) {
-        launchBtn.textContent = "🚀 Launch SB";
-        launchBtn.disabled = false;
-        alert("Server Error: " + err.message);
+        status.style.color = "red";
+        status.textContent = "❌ Server error";
       }
+
+      btn.innerHTML = '<i class="fas fa-rocket"></i> Launch SB';
     });
   </script>
 </body>
-                 </html>
+  </html>
