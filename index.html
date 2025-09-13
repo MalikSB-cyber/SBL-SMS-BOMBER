@@ -1,173 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SBL HACKER UI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SBL HACKER</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #2a003f, #0d001a);
-      color: #fff;
+      background: radial-gradient(circle at top, #1a0033, #0d001a);
+      color: white;
       text-align: center;
-      min-height: 100vh;
     }
-
-    /* Common Box Style */
-    .box {
-      width: 80%;
-      max-width: 350px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Header */
     .header {
-      margin-top: 40px;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 18px; /* height barhayi */
-      font-size: 22px; /* size barhaya */
-      font-weight: bold;
-      color: #00cfff;
-      border: 2px solid #00cfff;
+      margin: 30px auto 15px auto;
+      padding: 15px 20px;
+      width: 90%;
+      max-width: 500px;
+      background: #0d001a;
       border-radius: 15px;
       box-shadow: 0 0 20px #00cfff;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 10px;
       position: relative;
     }
-
     .header img {
+      position: absolute;
+      left: 15px;
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      border: 2px solid #00cfff;
-      position: absolute;
-      left: 10px;
     }
-
-    /* Card Box */
-    .container {
-      margin: 40px auto;
-      padding: 20px;
-      background: rgba(20, 0, 40, 0.9);
-      border: 2px solid #00cfff;
-      border-radius: 20px;
-      box-shadow: 0 0 25px #00cfff;
-    }
-
-    h2 {
-      margin-bottom: 20px;
+    .header h1 {
+      flex: 1;
+      margin: 0;
       color: #00cfff;
-      font-size: 24px;
-    }
-
-    input {
-      width: 90%;
-      padding: 12px;
-      margin: 15px auto;
-      border-radius: 12px;
-      border: 2px solid #00cfff;
-      outline: none;
-      background: transparent;
-      color: white;
+      font-size: 22px;
+      font-weight: bold;
       text-align: center;
-      font-size: 14px;
-      box-shadow: 0 0 15px #00cfff;
-      display: block;
     }
-
-    /* Buttons */
+    .card {
+      margin: 10px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      background: #0d001a;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00cfff;
+    }
+    .card h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #00cfff;
+    }
+    .card input {
+      width: 85%;
+      max-width: 350px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 2px solid #00cfff;
+      border-radius: 8px;
+      outline: none;
+      text-align: center;
+      font-size: 16px;
+    }
     .btn {
       display: block;
-      width: 90%;
+      width: 85%;
+      max-width: 350px;
       margin: 10px auto;
       padding: 12px;
       border: none;
       border-radius: 25px;
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-      background: linear-gradient(90deg, #0099ff, #00cfff);
       color: white;
+      background: #00cfff;
       box-shadow: 0 0 15px #00cfff;
+      transition: 0.3s;
     }
-
-    .btn:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
+    .btn:hover {
+      opacity: 0.85;
     }
-
-    /* Success message */
     .success {
-      margin-top: 15px;
-      font-size: 14px;
-      color: #00ff88;
-      font-weight: bold;
       display: none;
+      color: #00ff88;
+      margin-top: 15px;
+      font-weight: bold;
     }
-
-    /* Footer */
-    .footer {
-      margin-top: 30px;
-      font-size: 11px;
-      color: #aaa;
+    footer {
+      margin: 20px 0;
+      font-size: 12px;
+      color: gray;
+    }
+    footer span {
+      color: #00cfff;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="header box">
-    <img src="https://i.postimg.cc/8Cyn5rh2/OIG3-1.jpg" alt="Logo">
-    <span>SBL HACKER</span>
-  </div>
-  
-  <div class="container box">
-    <h2>Welcome</h2>
-    <input type="text" id="number" placeholder="Enter number (e.g., 92323....)">
-    <button class="btn" id="launchBtn">🚀 Launch SB</button>
-    <div class="success" id="successMsg">✅ Successfully Sent</div>
-    <button class="btn">💬 Join WhatsApp</button>
+  <!-- Header -->
+  <div class="header">
+    <img src="https://i.postimg.cc/8Cyn5rh2/OIG3-1.jpg" alt="Logo"/>
+    <h1>SBL HACKER</h1>
   </div>
 
-  <div class="footer">
-    © 2025 All Rights Reserved SBL HACKER | For Educational Use Only
+  <!-- Card -->
+  <div class="card">
+    <h2>Welcome</h2>
+    <input type="text" id="numberInput" placeholder="Enter number (e.g., 92323....)" />
+
+    <button class="btn" id="launchBtn">🚀 Launch SB</button>
+
+    <button class="btn">💬 Join WhatsApp</button>
+
+    <div class="success" id="successMsg">✅ Successfully Send</div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 All Rights Reserved SBL HACKER | For Educational Use Only<br>
+    Developed by <span>SBL HACKER</span>
+  </footer>
 
   <script>
     const launchBtn = document.getElementById("launchBtn");
+    const numberInput = document.getElementById("numberInput");
     const successMsg = document.getElementById("successMsg");
 
     launchBtn.addEventListener("click", async () => {
-      const inputVal = document.getElementById("number").value.trim();
-      if (inputVal === "") {
-        alert("Please enter a number!");
+      const inputVal = numberInput.value.trim();
+      if (!inputVal) {
+        alert("Please enter a number");
         return;
       }
 
-      // Show loading dots
-      let dots = 0;
-      launchBtn.textContent = "🚀 Launch SB";
+      launchBtn.textContent = "🚀 Launch SB ...";
       launchBtn.disabled = true;
       successMsg.style.display = "none";
 
-      const interval = setInterval(() => {
-        dots = (dots + 1) % 4;
-        launchBtn.textContent = "🚀 Launch SB" + ".".repeat(dots);
-      }, 500);
-
       try {
-        const response = await fetch("/api/your-backend-file", {
+        const response = await fetch("/api/sms", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ number: inputVal }),
         });
 
-        const result = await response.json();
+        const contentType = response.headers.get("content-type");
+        let result;
 
-        clearInterval(interval);
+        if (contentType && contentType.includes("application/json")) {
+          result = await response.json();
+        } else {
+          const text = await response.text();
+          throw new Error("Server returned non-JSON: " + text);
+        }
+
         launchBtn.textContent = "🚀 Launch SB";
         launchBtn.disabled = false;
 
@@ -176,67 +168,12 @@
         } else {
           alert("Error: " + (result.error || "Unknown error"));
         }
-      } catch (error) {
-        clearInterval(interval);
+      } catch (err) {
         launchBtn.textContent = "🚀 Launch SB";
         launchBtn.disabled = false;
-        alert("Server Error: " + error.message);
+        alert("Server Error: " + err.message);
       }
     });
   </script>
 </body>
-    </html>
-  <!-- Footer -->
-  <footer>
-    Developed by <b>SBL HACKER</b>
-  </footer>
-
-  <script>
-    // Matrix Effect
-    const bg = document.querySelector('.matrix-bg');
-    for (let i = 0; i < 70; i++) {
-      let span = document.createElement('span');
-      span.innerText = Math.random() > 0.5 ? "1" : "0";
-      span.style.left = Math.random() * 100 + "vw";
-      span.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      span.style.fontSize = (12 + Math.random() * 12) + "px";
-      bg.appendChild(span);
-    }
-
-    // API Call
-    async function sendSMS() {
-      let num = document.getElementById("number").value;
-      const loadingBar = document.getElementById("loadingBar");
-      const progress = loadingBar.querySelector(".progress");
-
-      if (!num) return alert("⚠️ Please enter a number!");
-
-      // Show loading bar
-      loadingBar.style.display = "block";
-      loadingBar.classList.remove("success");
-      progress.style.width = "100%";
-
-      try {
-        let res = await fetch("/api/sms", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ number: num })
-        });
-
-        let data = await res.json();
-        if (data.success) {
-          setTimeout(() => {
-            loadingBar.classList.add("success");
-          }, 2000);
-        } else {
-          alert("❌ Error: " + (data.error || "Unknown"));
-          loadingBar.style.display = "none";
-        }
-      } catch (err) {
-        alert("⚠️ Server error: " + err.message);
-        loadingBar.style.display = "none";
-      }
-    }
-  </script>
-</body>
-</html>
+                 </html>
