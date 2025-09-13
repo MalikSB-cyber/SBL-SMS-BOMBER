@@ -1,160 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SBL SMS BOMBER</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SBL HACKER UI</title>
   <style>
-    html, body {
-      height: 100%;
-      width: 100%;
+    body {
       margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", Roboto, sans-serif;
-      background: black;
-      color: #f1f5f9;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-
-    /* Background Matrix Animation */
-    .matrix-bg {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: black;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .matrix-bg span {
-      position: absolute;
-      color: #38bdf8; /* Sky blue */
-      font-size: 16px;
-      animation: drop 4s linear infinite;
-      opacity: 0.6;
-    }
-    @keyframes drop {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100vh); }
-    }
-
-    /* Card */
-    .card {
-      position: relative;
-      z-index: 1;
-      background: rgba(30, 41, 59, 0.9);
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 12px 40px rgba(56, 189, 248, 0.7);
-      width: 100%;
-      max-width: 450px;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #2a003f, #0d001a);
+      color: #fff;
       text-align: center;
-      backdrop-filter: blur(10px);
-      animation: fadeIn 1.5s ease-in-out;
+      min-height: 100vh;
+    }
+
+    /* Common Box Style */
+    .box {
+      width: 80%;
+      max-width: 350px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Header */
+    .header {
+      margin-top: 40px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 18px; /* height barhayi */
+      font-size: 22px; /* size barhaya */
+      font-weight: bold;
+      color: #00cfff;
+      border: 2px solid #00cfff;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00cfff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid #00cfff;
+      position: absolute;
+      left: 10px;
+    }
+
+    /* Card Box */
+    .container {
+      margin: 40px auto;
+      padding: 20px;
+      background: rgba(20, 0, 40, 0.9);
+      border: 2px solid #00cfff;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #00cfff;
     }
 
     h2 {
-      font-size: 26px;
       margin-bottom: 20px;
-      color: #38bdf8;
-      text-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
-      letter-spacing: 1px;
-      animation: glowText 2s infinite alternate;
-    }
-    @keyframes glowText {
-      from { text-shadow: 0 0 10px #0ea5e9, 0 0 20px #38bdf8; }
-      to { text-shadow: 0 0 20px #7dd3fc, 0 0 40px #0ea5e9; }
+      color: #00cfff;
+      font-size: 24px;
     }
 
     input {
-      width: 100%;
+      width: 90%;
       padding: 12px;
-      margin-bottom: 14px;
-      border-radius: 8px;
-      border: none;
+      margin: 15px auto;
+      border-radius: 12px;
+      border: 2px solid #00cfff;
       outline: none;
-      font-size: 15px;
-      background: #1e293b;
-      color: #fff;
-      box-shadow: inset 0 0 5px rgba(56, 189, 248, 0.4);
-    }
-
-    button, .whatsapp-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: linear-gradient(90deg, #0ea5e9, #38bdf8);
-      border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 8px;
-      font-size: 16px;
+      background: transparent;
       color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-    }
-    button:hover, .whatsapp-btn:hover {
-      transform: scale(1.07);
-      box-shadow: 0 0 18px #38bdf8;
+      text-align: center;
+      font-size: 14px;
+      box-shadow: 0 0 15px #00cfff;
+      display: block;
     }
 
-    /* Loading Line */
-    .loading-bar {
-      margin-top: 12px;
-      height: 6px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      overflow: hidden;
+    /* Buttons */
+    .btn {
+      display: block;
+      width: 90%;
+      margin: 10px auto;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+      background: linear-gradient(90deg, #0099ff, #00cfff);
+      color: white;
+      box-shadow: 0 0 15px #00cfff;
+    }
+
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* Success message */
+    .success {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #00ff88;
+      font-weight: bold;
       display: none;
-    }
-    .loading-bar .progress {
-      height: 100%;
-      width: 0%;
-      background: #38bdf8;
-      transition: width 2s linear;
-    }
-    .loading-bar.success .progress {
-      background: #22c55e !important; /* green */
-      width: 100% !important;
     }
 
     /* Footer */
-    footer {
-      margin-top: 18px;
-      font-size: 13px;
-      color: #bbb;
-      text-align: center;
-      z-index: 1;
-      animation: fadeIn 2s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+    .footer {
+      margin-top: 30px;
+      font-size: 11px;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <!-- Background Animation -->
-  <div class="matrix-bg"></div>
-
-  <!-- Card -->
-  <div class="card">
-    <h2>SBL HACKER</h2>
-    <input type="text" id="number" placeholder="Enter Number (92xxxxxxxxxx)" />
-    <button onclick="sendSMS()">START</button>
-    <div class="loading-bar" id="loadingBar"><div class="progress"></div></div>
-    <br>
-    <a href="https://whatsapp.com/channel/0029VbBVDAc1noz5dhxnYO3r" target="_blank" class="whatsapp-btn">
-       WhatsApp Channel
-    </a>
+  <div class="header box">
+    <img src="https://i.postimg.cc/8Cyn5rh2/OIG3-1.jpg" alt="Logo">
+    <span>SBL HACKER</span>
+  </div>
+  
+  <div class="container box">
+    <h2>Welcome</h2>
+    <input type="text" id="number" placeholder="Enter number (e.g., 92323....)">
+    <button class="btn" id="launchBtn">🚀 Launch SB</button>
+    <div class="success" id="successMsg">✅ Successfully Sent</div>
+    <button class="btn">💬 Join WhatsApp</button>
   </div>
 
+  <div class="footer">
+    © 2025 All Rights Reserved SBL HACKER | For Educational Use Only
+  </div>
+
+  <script>
+    const launchBtn = document.getElementById("launchBtn");
+    const successMsg = document.getElementById("successMsg");
+
+    launchBtn.addEventListener("click", async () => {
+      const inputVal = document.getElementById("number").value.trim();
+      if (inputVal === "") {
+        alert("Please enter a number!");
+        return;
+      }
+
+      // Show loading dots
+      let dots = 0;
+      launchBtn.textContent = "🚀 Launch SB";
+      launchBtn.disabled = true;
+      successMsg.style.display = "none";
+
+      const interval = setInterval(() => {
+        dots = (dots + 1) % 4;
+        launchBtn.textContent = "🚀 Launch SB" + ".".repeat(dots);
+      }, 500);
+
+      try {
+        const response = await fetch("/api/your-backend-file", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ number: inputVal }),
+        });
+
+        const result = await response.json();
+
+        clearInterval(interval);
+        launchBtn.textContent = "🚀 Launch SB";
+        launchBtn.disabled = false;
+
+        if (result.success) {
+          successMsg.style.display = "block";
+        } else {
+          alert("Error: " + (result.error || "Unknown error"));
+        }
+      } catch (error) {
+        clearInterval(interval);
+        launchBtn.textContent = "🚀 Launch SB";
+        launchBtn.disabled = false;
+        alert("Server Error: " + error.message);
+      }
+    });
+  </script>
+</body>
+    </html>
   <!-- Footer -->
   <footer>
     Developed by <b>SBL HACKER</b>
